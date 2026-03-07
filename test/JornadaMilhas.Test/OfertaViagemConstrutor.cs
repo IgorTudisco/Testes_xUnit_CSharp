@@ -2,10 +2,11 @@ using JornadaMilhasV1.Modelos;
 
 namespace JornadaMilhas.Test
 {
-    public class OfertaViagemTest
+    // Mudando o nome da classe de teste para refletir o cenário testado, seguindo a convenção de nomenclatura de testes
+    public class OfertaViagemConstrutor
     {
         [Fact]
-        public void TestandoOfertaVaida()
+        public void RetornaDadosValidosQuandoDadosValidos()
         {
             // Cenário - Arrange
             Rota rota = new Rota("São Paulo", "Rio de Janeiro");
@@ -21,7 +22,7 @@ namespace JornadaMilhas.Test
         }
 
         [Fact]
-        public void TestandoOfertaComRotaNula()
+        public void RetornaMensagemDeErroDeRotaOuPeriodoInvalidosQuandoARotaForNula()
         {
             // Seguindo o padrão AAA (Arrange, Act, Assert)
             Rota rota = null;
@@ -35,7 +36,7 @@ namespace JornadaMilhas.Test
         }
 
         [Fact]
-        public void TestandoOfertaDataVoltaMenor()
+        public void RetornaMensagemDeErroQuandoADataDeIdaForMaiorQueAdataDeVolta() // Padronizando a nomenclatura do teste para refletir o cenário testado
         {
             Rota rota = new Rota("São Paulo", "Rio de Janeiro");
             Periodo periodo = new Periodo(new DateTime(2026, 1, 15), new DateTime(2024, 10, 20));
@@ -48,7 +49,7 @@ namespace JornadaMilhas.Test
         }
 
         [Fact]
-        public void TestandoOfertaValorZerado()
+        public void RetornaMensagemDeErroQuandoOPrecoForIgualAZero()
         {
             Rota rota = new Rota("São Paulo", "Rio de Janeiro");
             Periodo periodo = new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
@@ -60,7 +61,7 @@ namespace JornadaMilhas.Test
         }
 
         [Fact]
-        public void TestandoOfertaValorNegativo()
+        public void RetornaMensagemDeErroQuandoOPrecoForMenorQueZero()
         {
             Rota rota = new Rota("São Paulo", "Rio de Janeiro");
             Periodo periodo = new Periodo (new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
