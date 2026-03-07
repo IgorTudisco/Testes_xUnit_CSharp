@@ -73,3 +73,11 @@ namespace JornadaMilhas.Test
         }
     }
 }
+
+
+// Artigos:
+
+/*
+ * https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices
+ * https://ardalis.com/mastering-unit-tests-dotnet-best-practices-naming-conventions/
+ */
