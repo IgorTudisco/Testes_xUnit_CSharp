@@ -5,7 +5,7 @@ namespace JornadaMilhas.Test
     public class OfertaViagemTest
     {
         [Fact]
-        public void TestandoOpertaVaida()
+        public void TestandoOfertaVaida()
         {
             // Cenário - Arrange
             Rota rota = new Rota("São Paulo", "Rio de Janeiro");
@@ -21,7 +21,7 @@ namespace JornadaMilhas.Test
         }
 
         [Fact]
-        public void TestandoOpertaComRotaNula()
+        public void TestandoOfertaComRotaNula()
         {
             // Seguindo o padrão AAA (Arrange, Act, Assert)
             Rota rota = null;
@@ -35,9 +35,8 @@ namespace JornadaMilhas.Test
         }
 
         [Fact]
-        public void TestandoOpertaDataVoltaMenor()
+        public void TestandoOfertaDataVoltaMenor()
         {
-            // Seguindo o padrão AAA (Arrange, Act, Assert)
             Rota rota = new Rota("São Paulo", "Rio de Janeiro");
             Periodo periodo = new Periodo(new DateTime(2026, 1, 15), new DateTime(2024, 10, 20));
             double valor = 500.0;
@@ -49,17 +48,26 @@ namespace JornadaMilhas.Test
         }
 
         [Fact]
-        public void TestandoOpertaValorZerado()
+        public void TestandoOfertaValorZerado()
         {
-            // Cenário - Arrange
             Rota rota = new Rota("São Paulo", "Rio de Janeiro");
             Periodo periodo = new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
             double valor = 00.0;
 
-            // Ação - Act
             OfertaViagem oferta = new OfertaViagem(rota, periodo, valor);
 
-            // Verificação - Assert
+            Assert.Contains("O preço da oferta de viagem deve ser maior que zero.", oferta.Erros.Sumario);
+        }
+
+        [Fact]
+        public void TestandoOfertaValorNegativo()
+        {
+            Rota rota = new Rota("São Paulo", "Rio de Janeiro");
+            Periodo periodo = new Periodo (new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
+            double valor = -100.0;
+
+            OfertaViagem oferta = new OfertaViagem (rota, periodo, valor);
+
             Assert.Contains("O preço da oferta de viagem deve ser maior que zero.", oferta.Erros.Sumario);
         }
     }
