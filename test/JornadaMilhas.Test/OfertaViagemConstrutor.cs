@@ -37,6 +37,19 @@ namespace JornadaMilhas.Test
             Assert.Contains("A oferta de viagem não possui rota ou período válidos.", oferta.Erros.Sumario);
             Assert.False(oferta.EhValido);
         }
+
+        [Fact]
+        public void RetornaTresErrosDeValidacaoQuandoRotaPeriodoEPrecoSaoInvalidos()
+        {
+            int quantidadeEsperada = 3;
+            Rota? rota = null;
+            Periodo periodo = new Periodo(new DateTime(2026, 1, 15), new DateTime(2024, 1, 20));
+            double valor = -100.0;
+            
+            OfertaViagem oferta = new OfertaViagem(rota, periodo, valor);           
+
+            Assert.Equal(quantidadeEsperada, oferta.Erros.Count());
+        }
     }
 }
 
