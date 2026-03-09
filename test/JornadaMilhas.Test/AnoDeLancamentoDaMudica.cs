@@ -27,26 +27,25 @@ namespace JornadaMilhas.Test
         public void RetonaNuloQuandoOAnoForIgualAZero()
         {
             string nome = "Música Teste";
-            int? anoLancamento = 0;
-            Musica musica = new Musica(nome);
-            musica.AnoLancamento = anoLancamento;
+            int? anoInvalido = 0;
+            Musica musica = new(nome)
+            {
+                AnoLancamento = anoInvalido
+            };
 
-            int? resultado = null;
-
-            Assert.Equal(resultado, musica.AnoLancamento);
+            Assert.Null(musica.AnoLancamento);
         }
 
         [Fact]
         public void RetonaNuloQuandoOAnoForNegativo()
         {
             string nome = "Música Teste";
-            int? anoLancamento = -1522;
+            int? anoInvalido = -1522;
             Musica musica = new Musica(nome);
-            musica.AnoLancamento = anoLancamento;
 
-            int? resultado = null;
+            musica.AnoLancamento = anoInvalido;
 
-            Assert.Equal(resultado, musica.AnoLancamento);
+            Assert.Null(musica.AnoLancamento);
         }
     }
 }

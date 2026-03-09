@@ -8,7 +8,9 @@ namespace JornadaMilhas.Modelos
 {
     public class Musica
     {
+        public const string ArtistaDesconecido = "Artista desconhecido";
         private int? anoLancamento;
+        private string artista;
 
         public Musica(string nome)
         {
@@ -17,8 +19,22 @@ namespace JornadaMilhas.Modelos
 
         public string Nome { get; set; }
         public int Id { get; set; }
-        public string Artista { get; set; }
-        public int? AnoLancamento { 
+        
+        public string? Artista
+        {
+            get => artista;
+            set
+            {
+                artista = value!;
+                if (artista == null)
+                {
+                    artista = ArtistaDesconecido;
+                }
+            }
+        }
+
+        public int? AnoLancamento
+        { 
             get => anoLancamento;
             set
             {
