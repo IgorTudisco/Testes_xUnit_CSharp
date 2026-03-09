@@ -3,7 +3,7 @@
 // classe de exercícios
 namespace JornadaMilhas.Test
 {
-    public class MusicaTest
+    public class MusicaConstrutor
     {
         [Theory]
         [InlineData("Música Teste")]

@@ -47,11 +47,13 @@ namespace JornadaMilhas.Test
  * https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices
  * https://ardalis.com/mastering-unit-tests-dotnet-best-practices-naming-conventions/
  * https://learn.microsoft.com/pt-br/visualstudio/test/quick-start-test-driven-development-with-test-explorer?view=vs-2022
+ * https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices#validate-private-methods-by-unit-testing-public-methods
  */
 
 // Documentação:
 
 /*
+ * https://learn.microsoft.com/pt-br/dotnet/fundamentals/reflection/overview
  * https://xunit.net/?tabs=cs
   
    Outras Natoções
