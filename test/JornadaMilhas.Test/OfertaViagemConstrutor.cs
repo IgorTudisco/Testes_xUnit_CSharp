@@ -46,6 +46,7 @@ namespace JornadaMilhas.Test
 /*
  * https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices
  * https://ardalis.com/mastering-unit-tests-dotnet-best-practices-naming-conventions/
+ * https://learn.microsoft.com/pt-br/visualstudio/test/quick-start-test-driven-development-with-test-explorer?view=vs-2022
  */
 
 // Documentação:
