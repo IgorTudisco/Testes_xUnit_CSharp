@@ -47,3 +47,15 @@ namespace JornadaMilhas.Test
  * https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices
  * https://ardalis.com/mastering-unit-tests-dotnet-best-practices-naming-conventions/
  */
+
+// Documentação:
+
+/*
+ * https://xunit.net/?tabs=cs
+  
+   Outras Natoções
+    [TestFixture] - uma classe que contém um conjunto de testes de unidade relacionados;
+    [Test] - utilizada para identificar testes distintos dentro de uma mesma classe de teste;
+    [Ignore] - utilizada para ignorar um teste específico durante a execução;
+    [Collection] - utilizada para agrupar testes em coleções específicas.
+ */

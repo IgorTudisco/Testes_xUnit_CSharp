@@ -1,6 +1,6 @@
 ﻿using JornadaMilhas.Modelos;
-using JornadaMilhasV1.Modelos;
 
+// classe de exercícios
 namespace JornadaMilhas.Test
 {
     public class MusicaTest
@@ -33,12 +33,11 @@ namespace JornadaMilhas.Test
             Assert.Equal(id, musica.Id);
         }
 
-        [Fact]
-        public void TesteToString()
+        [Theory]
+        [InlineData("Música Teste", 1)]
+        public void TestandoResultadoValidoDeAcordoComDadosDeEntrada(string nome, int id)
         {
             // Arrange
-            int id = 1;
-            string nome = "Música Teste";
             Musica musica = new Musica(nome);
             musica.Id = id;
             string toStringEsperado = @$"Id: {id} Nome: {nome}";
