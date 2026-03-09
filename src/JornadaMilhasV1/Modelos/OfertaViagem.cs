@@ -21,21 +21,14 @@ public class OfertaViagem: Valida
         set
         {
             desconto = value;
-
-            if (desconto < 0)
+            if (desconto >= Preco)
             {
-                Preco = Preco;
+                Preco *= (1 - DESCONTO_MAXIMO);
             }
-            else
+            else if (desconto > 0)
             {
-                if (desconto >= Preco)
-                {
-                    Preco *= (1 - DESCONTO_MAXIMO);
-                }
-                else
-                {
-                    Preco -= desconto;
-                }
+                Preco -= desconto;
+
             }
         } 
     }
