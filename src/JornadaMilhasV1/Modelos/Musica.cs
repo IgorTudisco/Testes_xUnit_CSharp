@@ -26,7 +26,7 @@ namespace JornadaMilhas.Modelos
             set
             {
                 artista = value!;
-                if (artista == null)
+                if (string.IsNullOrEmpty(artista))
                 {
                     artista = ArtistaDesconecido;
                 }

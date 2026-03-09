@@ -26,7 +26,7 @@ namespace JornadaMilhas.Test
         }
 
         [Fact]
-        public void RetornaArtistaDesconhecidoQuandoArtistaForNulo()
+        public void RetornaArtistaDesconhecidoQuandoValorInseridoEhNulo()
         {
             string nome = "Música Teste";
             string? artista = null;
@@ -37,6 +37,19 @@ namespace JornadaMilhas.Test
 
             string resultado = "Artista desconhecido";
 
+            Assert.Equal(resultado, musica.Artista);
+        }
+
+        [Fact]
+        public void RetornaArtistaDesconecidoQuandoValorInseridoEhVazio()
+        {
+            string nome = "Música Teste";
+            string? artista = "";
+            Musica musica = new Musica(nome)
+            {
+                Artista = artista
+            };
+            string resultado = "Artista desconhecido";
             Assert.Equal(resultado, musica.Artista);
         }
     }
