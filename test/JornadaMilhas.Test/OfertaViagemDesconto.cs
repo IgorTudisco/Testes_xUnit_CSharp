@@ -38,22 +38,25 @@ namespace JornadaMilhas.Test
 
             oferta.Desconto = desconto;
 
-            Assert.Equal(precoComDesconto, oferta.Preco);
+            Assert.Equal(precoComDesconto, oferta.Preco, 0.001); // Verificando até 3 casas decimais
         }
 
         [Fact]
-        public void RetornaPrecoSeODescontoForNegativo()
+        public void RetornaPrecoOriginalQuandoValorDescontoNegativo()
         {
+            //arrange
             Rota rota = new Rota("São Paulo", "Rio de Janeiro");
-            Periodo periodo = new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
-            double precoOriginal = 1000.0;
-            double desconto = -50.0;
-
+            Periodo periodo = new Periodo(new DateTime(2024, 05, 01), new DateTime(2024, 05, 10));
+            double precoOriginal = 100.00;
+            double desconto = -20.00;
+            double precoComDesconto = precoOriginal;
             OfertaViagem oferta = new OfertaViagem(rota, periodo, precoOriginal);
 
+            //act
             oferta.Desconto = desconto;
 
-            Assert.Equal(precoOriginal, oferta.Preco);
+            //assert
+            Assert.Equal(precoComDesconto, oferta.Preco, 0.001);
         }
     }
 }
