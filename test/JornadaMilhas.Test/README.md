@@ -12,6 +12,7 @@
 
 ## Documentação
 
+- ### https://github.com/bchavez/Bogus
 - ### https://learn.microsoft.com/pt-br/dotnet/fundamentals/reflection/overview
 - ### https://xunit.net/?tabs=cs
   
