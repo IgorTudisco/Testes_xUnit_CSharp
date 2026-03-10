@@ -1,6 +1,6 @@
-=> Refs.
+# *Referencias Bibliograficas:*
 
-## Artigos:
+## Artigos
 
 - ### https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices
 - ### https://ardalis.com/mastering-unit-tests-dotnet-best-practices-naming-conventions/
@@ -10,7 +10,7 @@
 - ### https://balta.io/blog/testes-de-mutacao-stryke-dotnethttps://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices#use-mocks-to-isolate-code-under-test
  
 
-## Documentação:
+## Documentação
 
 - ### https://learn.microsoft.com/pt-br/dotnet/fundamentals/reflection/overview
 - ### https://xunit.net/?tabs=cs
