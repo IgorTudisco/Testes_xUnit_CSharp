@@ -54,6 +54,8 @@ public class GerenciadorDeOfertas
         Console.WriteLine("\nOferta cadastrada com sucesso.");
     }
 
+    public OfertaViagem? RecuperaMaiorDesconto(Func<OfertaViagem, bool> filtro) => ofertaViagem.FirstOrDefault();
+
     public bool AdicionarOfertaNaLista(OfertaViagem ofertaCadastrada)
     {
         if (ofertaCadastrada != null)

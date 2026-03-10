@@ -5,42 +5,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhas.Test
+namespace JornadaMilhas.Test;
+
+public class OfertaViagemDesconto
 {
-    public class OfertaViagemDesconto
+    [Fact]
+    public void RetornaPrecoAtualQuandoAplicadoDesconto() // Usando TDD
     {
-        [Fact]
-        public void RetornaPrecoAtualQuandoAplicadoDesconto() // Usando TDD
-        {
-            Rota rota = new Rota("São Paulo", "Rio de Janeiro");
-            Periodo periodo = new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
-            double precoOriginal = 1000.0;
-            double desconto = 20.0;
-            double precoComDesconto = precoOriginal - desconto;
+        Rota rota = new Rota("São Paulo", "Rio de Janeiro");
+        Periodo periodo = new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
+        double precoOriginal = 1000.0;
+        double desconto = 20.0;
+        double precoComDesconto = precoOriginal - desconto;
 
-            OfertaViagem oferta = new OfertaViagem(rota, periodo, precoOriginal);
+        OfertaViagem oferta = new OfertaViagem(rota, periodo, precoOriginal);
 
-            oferta.Desconto = desconto;
+        oferta.Desconto = desconto;
 
-            Assert.Equal(precoComDesconto, oferta.Preco);
-        }
+        Assert.Equal(precoComDesconto, oferta.Preco);
+    }
 
-        [Theory]
-        [InlineData(120, 30)]
-        [InlineData(100, 30)]
-        public void RetornaDescontoMaximoQuandoValorDescontoMaiorOuIgualAoPreco(double desconto, double precoComDesconto)
-        {
-            //arrange
-            Rota rota = new Rota("OrigemA", "DestinoB");
-            Periodo periodo = new Periodo(new DateTime(2024, 05, 01), new DateTime(2024, 05, 10));
-            double precoOriginal = 100.00;
-            OfertaViagem oferta = new OfertaViagem(rota, periodo, precoOriginal);
+    [Theory]
+    [InlineData(120, 30)]
+    [InlineData(100, 30)]
+    public void RetornaDescontoMaximoQuandoValorDescontoMaiorOuIgualAoPreco(double desconto, double precoComDesconto)
+    {
+        //arrange
+        Rota rota = new Rota("OrigemA", "DestinoB");
+        Periodo periodo = new Periodo(new DateTime(2024, 05, 01), new DateTime(2024, 05, 10));
+        double precoOriginal = 100.00;
+        OfertaViagem oferta = new OfertaViagem(rota, periodo, precoOriginal);
 
-            //act
-            oferta.Desconto = desconto;
+        //act
+        oferta.Desconto = desconto;
 
-            //assert
-            Assert.Equal(precoComDesconto, oferta.Preco, 0.001);
-        }
+        //assert
+        Assert.Equal(precoComDesconto, oferta.Preco, 0.001);
     }
 }
