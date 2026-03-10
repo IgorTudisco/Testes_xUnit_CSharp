@@ -32,7 +32,7 @@ namespace JornadaMilhas.Test
             Periodo periodo = new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
             double valor = 500.0;
 
-            OfertaViagem oferta = new OfertaViagem(rota, periodo, valor);
+            OfertaViagem oferta = new OfertaViagem(rota!, periodo, valor);
 
             Assert.Contains("A oferta de viagem não possui rota ou período válidos.", oferta.Erros.Sumario);
             Assert.False(oferta.EhValido);
@@ -46,32 +46,37 @@ namespace JornadaMilhas.Test
             Periodo periodo = new Periodo(new DateTime(2026, 1, 15), new DateTime(2024, 1, 20));
             double valor = -100.0;
             
-            OfertaViagem oferta = new OfertaViagem(rota, periodo, valor);           
+            OfertaViagem oferta = new OfertaViagem(rota!, periodo, valor);           
 
             Assert.Equal(quantidadeEsperada, oferta.Erros.Count());
         }
+
+        [Fact]
+        public void RetornaMensagemDeErroQuandoOPrecoForZero()
+        {
+            // Seguindo o padrão AAA (Arrange, Act, Assert)
+            Rota rota = new Rota("São Paulo", "Rio de Janeiro");
+            Periodo periodo = new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
+            double valor = 0.0;
+
+            OfertaViagem oferta = new OfertaViagem(rota, periodo, valor);
+
+            Assert.Contains("O preço da oferta de viagem deve ser maior que zero.", oferta.Erros.Sumario);
+            Assert.False(oferta.EhValido);
+        }
+
+        [Fact]
+        public void RetornaToStringEhValido()
+        {
+            // Seguindo o padrão AAA (Arrange, Act, Assert)
+            Rota rota = new Rota("São Paulo", "Rio de Janeiro");
+            Periodo periodo = new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
+            double valor = 0.0;
+            string resultado = $"Origem: {rota.Origem}, Destino: {rota.Destino}, Data de Ida: {periodo.DataInicial.ToShortDateString()}, Data de Volta: {periodo.DataFinal.ToShortDateString()}, Preço: {valor:C}";
+
+            OfertaViagem oferta = new OfertaViagem(rota, periodo, valor);
+
+            Assert.Equal(resultado ,oferta.ToString());
+        }
     }
 }
-
-
-// Artigos:
-
-/*
- * https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices
- * https://ardalis.com/mastering-unit-tests-dotnet-best-practices-naming-conventions/
- * https://learn.microsoft.com/pt-br/visualstudio/test/quick-start-test-driven-development-with-test-explorer?view=vs-2022
- * https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices#validate-private-methods-by-unit-testing-public-methods
- */
-
-// Documentação:
-
-/*
- * https://learn.microsoft.com/pt-br/dotnet/fundamentals/reflection/overview
- * https://xunit.net/?tabs=cs
-  
-   Outras Natoções
-    [TestFixture] - uma classe que contém um conjunto de testes de unidade relacionados;
-    [Test] - utilizada para identificar testes distintos dentro de uma mesma classe de teste;
-    [Ignore] - utilizada para ignorar um teste específico durante a execução;
-    [Collection] - utilizada para agrupar testes em coleções específicas.
- */
