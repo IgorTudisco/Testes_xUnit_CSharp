@@ -8,12 +8,14 @@
 - ### https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices#validate-private-methods-by-unit-testing-public-methods
 - ### https://learn.microsoft.com/pt-br/visualstudio/test/using-code-coverage-to-determine-how-much-code-is-being-tested?view=vs-2022&tabs=csharp
 - ### https://balta.io/blog/testes-de-mutacao-stryke-dotnethttps://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices#use-mocks-to-isolate-code-under-test
- 
+- ### https://aws.amazon.com/pt/what-is/unit-testing/
+
 
 ## Documentação
 
 - ### https://github.com/bchavez/Bogus
 - ### https://learn.microsoft.com/pt-br/dotnet/fundamentals/reflection/overview
+- ### https://learn.microsoft.com/pt-br/visualstudio/test/unit-test-basics?view=vs-2022
 - ### https://xunit.net/?tabs=cs
   
 - ### Outras Natoções
@@ -22,3 +24,7 @@
 	- [Ignore] - utilizada para ignorar um teste específico durante a execução;
 	- [Collection] - utilizada para agrupar testes em coleções específicas.
 	
+## Livros
+
+- ### https://www.casadocodigo.com.br/products/livro-testes-de-software *pago*
+- ### https://www.casadocodigo.com.br/products/livro-tdd?_pos=9&_sid=f7a358dac&_ss=r&variant=970207625 *pago*
