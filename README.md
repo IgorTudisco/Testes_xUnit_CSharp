@@ -1,4 +1,4 @@
-# [Trilha](https://cursos.alura.com.br/course/testes-dot-net-criando-testes-unidade-xunit) => Testes em .NET
+# [Trilha](https://cursos.alura.com.br/formacao-testes-em-dotnet) => Testes em .NET
 
 ## Cursos da trilha
 
