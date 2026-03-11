@@ -3,9 +3,10 @@
 ## Cursos da trilha
 
 - ### Testes em .NET: criando testes de unidade com xUnit [Link do curso](https://cursos.alura.com.br/course/testes-dot-net-criando-testes-unidade-xunit)
-<!--
-  - Certificado [Link](https://cursos.alura.com.br/certificate/igortudisco/dot-net-persistindo-dados-entity-framework-core)
 
+  - Certificado [Link](https://cursos.alura.com.br/certificate/igortudisco/testes-dot-net-criando-testes-unidade-xunit)
+
+<!--
 - ### .NET: criando uma API Web com ASP.NET Core [Link do curso](https://cursos.alura.com.br/course/dotnet-criando-api-web-asp-net-core)
 
   - Certificado [Link](https://cursos.alura.com.br/certificate/igortudisco/dotnet-criando-api-web-asp-net-core)
