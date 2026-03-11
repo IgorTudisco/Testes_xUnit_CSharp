@@ -1,7 +1,6 @@
 ﻿using Bogus;
-using JornadaMilhasV1.Gerencidor;
+using JornadaMilhasV1.Gerenciador;
 using JornadaMilhasV1.Modelos;
-using NuGet.Frameworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,28 +8,28 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JornadaMilhas.Test;
-
-public class GerenciadorDeOFertasRecuperaMaiorDesconto
+public class GerenciadorDeOfertasRecuperaMaiorDesconto
 {
     [Fact]
     public void RetornaOfertaNulaQuandoListaEstaVazia()
     {
-        // arrange
+        //arrange
         var lista = new List<OfertaViagem>();
         var gerenciador = new GerenciadorDeOfertas(lista);
         Func<OfertaViagem, bool> filtro = o => o.Rota.Destino.Equals("São Paulo");
 
-        // act
+        //act
         var oferta = gerenciador.RecuperaMaiorDesconto(filtro);
 
-        // assert
-         Assert.Null(oferta);
+        //assert
+        Assert.Null(oferta);
     }
 
     [Fact]
-    public void RetonaOfertaEspecificaQuandoDestinoSaoPauloEDeconto40()
+    // destino = são paulo, desconto = 40, preco = 80
+    public void RetornaOfertaEspecificaQuandoDestinoSaoPauloEDesconto40()
     {
-        // arrange
+        //arrange
         var fakerPeriodo = new Faker<Periodo>()
             .CustomInstantiator(f =>
             {
@@ -38,18 +37,15 @@ public class GerenciadorDeOFertasRecuperaMaiorDesconto
                 return new Periodo(dataInicio, dataInicio.AddDays(30));
             });
 
-        var rota = new Rota("Recife", "São Paulo");
-        var segundarota = new Rota("Recife", "Bhaia");
+        var rota = new Rota("Curitiba", "São Paulo");
 
         var fakerOferta = new Faker<OfertaViagem>()
-            .CustomInstantiator
-            (
-                f => new OfertaViagem(
-                    rota, fakerPeriodo.Generate(), 100 * f.Random.Int(1, 100
-                    )
-                )
+            .CustomInstantiator(f => new OfertaViagem (
+                rota,
+                fakerPeriodo.Generate(),
+                100 * f.Random.Int(1, 100))
             )
-            .RuleFor(o => o.Desconto,  f => 40)
+            .RuleFor(o => o.Desconto, f => 40)
             .RuleFor(o => o.Ativa, f => true);
 
         var ofertaEscolhida = new OfertaViagem(rota, fakerPeriodo.Generate(), 80)
@@ -64,25 +60,18 @@ public class GerenciadorDeOFertasRecuperaMaiorDesconto
             Ativa = false
         };
 
-        var ofertaSegundaRota = new OfertaViagem(segundarota, fakerPeriodo.Generate(), 60)
-        {
-            Desconto = 40,
-            Ativa = true
-        };
 
         var lista = fakerOferta.Generate(200);
         lista.Add(ofertaEscolhida);
         lista.Add(ofertaInativa);
-        lista.Add(ofertaSegundaRota);
         var gerenciador = new GerenciadorDeOfertas(lista);
         Func<OfertaViagem, bool> filtro = o => o.Rota.Destino.Equals("São Paulo");
-        var precoEsperado = 40.00;
+        var precoEsperado = 40;
 
-        // act
+        //act
         var oferta = gerenciador.RecuperaMaiorDesconto(filtro);
-        
 
-        // assert
+        //assert
         Assert.NotNull(oferta);
         Assert.Equal(precoEsperado, oferta.Preco, 0.0001);
     }

@@ -6,22 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JornadaMilhas.Test;
-
 public class OfertaViagemDesconto
 {
     [Fact]
-    public void RetornaPrecoAtualQuandoAplicadoDesconto() // Usando TDD
+    public void RetornaPrecoAtualizadoQuandoAplicadoDesconto()
     {
-        Rota rota = new Rota("São Paulo", "Rio de Janeiro");
-        Periodo periodo = new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20));
-        double precoOriginal = 1000.0;
-        double desconto = 20.0;
+        //arrange
+        Rota rota = new Rota("OrigemA", "DestinoB");
+        Periodo periodo = new Periodo(new DateTime(2024, 05, 01), new DateTime(2024, 05, 10));
+        double precoOriginal = 100.00;
+        double desconto = 20.00;
         double precoComDesconto = precoOriginal - desconto;
-
         OfertaViagem oferta = new OfertaViagem(rota, periodo, precoOriginal);
 
+        //act
         oferta.Desconto = desconto;
 
+        //assert
         Assert.Equal(precoComDesconto, oferta.Preco);
     }
 
