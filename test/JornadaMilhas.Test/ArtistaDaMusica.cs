@@ -1,4 +1,5 @@
-﻿using JornadaMilhas.Modelos;
+﻿using Bogus;
+using JornadaMilhas.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +11,20 @@ namespace JornadaMilhas.Test
     public class ArtistaDaMusica
     {
         [Fact]
-        public void RetornaArtistaDaMusica()
+        public void RetornaToStringCorretamenteQuandoMusicaEhCadastrada()
         {
             // Arrange
-            string nome = "Música Teste";
-            string artista = "Artista Teste";
-            Musica musica = new Musica(nome)
-            {
-                Artista = artista
-            };
+            var faker = new Faker();
+            var id = faker.Random.Int();
+            var nome = faker.Name.FullName();
+            var saidaEsperada = $"Id: {id} Nome: {nome}";
+            var musica = new Musica(nome) { Id = id };
+
             // Act
-            string resultado = musica.Artista;
+            var result = musica.ToString();
+
             // Assert
-            Assert.Equal(resultado, musica.Artista);
+            Assert.Equal(saidaEsperada, result);
         }
 
         [Fact]
@@ -51,6 +53,34 @@ namespace JornadaMilhas.Test
             };
             string resultado = "Artista desconhecido";
             Assert.Equal(resultado, musica.Artista);
+        }
+
+        [Fact]
+        public void RetornaArtistaDesconhecidoQuandoInseridoDadoNuloNoArtista()
+        {
+            // Arrange
+            var nome = new Faker().Name.FullName();
+            var musica = new Musica(nome) { Artista = null };
+
+            // Act
+            var artista = musica.Artista;
+
+            // Assert
+            Assert.Equal("Artista desconhecido", artista);
+        }
+
+        [Fact]
+        public void RetornoAnoDeLancamentoNuloQuandoValorInseridoMenorQueZero()
+        {
+            // Arrange
+            var nome = new Faker().Name.FullName();
+            var musica = new Musica(nome) { AnoLancamento = -1 };
+
+            // Act
+            var anoLancamento = musica.AnoLancamento;
+
+            // Assert
+            Assert.Null(anoLancamento);
         }
     }
 }
