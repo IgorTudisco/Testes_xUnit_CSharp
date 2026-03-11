@@ -39,6 +39,7 @@ public class GerenciadorDeOFertasRecuperaMaiorDesconto
             });
 
         var rota = new Rota("Recife", "São Paulo");
+        var segundarota = new Rota("Recife", "Bhaia");
 
         var fakerOferta = new Faker<OfertaViagem>()
             .CustomInstantiator
@@ -63,9 +64,16 @@ public class GerenciadorDeOFertasRecuperaMaiorDesconto
             Ativa = false
         };
 
+        var ofertaSegundaRota = new OfertaViagem(segundarota, fakerPeriodo.Generate(), 60)
+        {
+            Desconto = 40,
+            Ativa = true
+        };
+
         var lista = fakerOferta.Generate(200);
         lista.Add(ofertaEscolhida);
         lista.Add(ofertaInativa);
+        lista.Add(ofertaSegundaRota);
         var gerenciador = new GerenciadorDeOfertas(lista);
         Func<OfertaViagem, bool> filtro = o => o.Rota.Destino.Equals("São Paulo");
         var precoEsperado = 40.00;
