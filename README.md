@@ -6,9 +6,9 @@
 
   - Certificado [Link](https://cursos.alura.com.br/certificate/igortudisco/testes-dot-net-criando-testes-unidade-xunit)
 
-<!--
-- ### .NET: criando uma API Web com ASP.NET Core [Link do curso](https://cursos.alura.com.br/course/dotnet-criando-api-web-asp-net-core)
 
+- ### Testes em .NET: testando integração com banco de dados [Link do curso](https://cursos.alura.com.br/course/testes-dotnet-testando-integracao-banco-dados)
+<!--
   - Certificado [Link](https://cursos.alura.com.br/certificate/igortudisco/dotnet-criando-api-web-asp-net-core)
 
 - ### .NET: desenvolvendo uma aplicação web com ASP.NET Core Blazor [Link do curso](https://cursos.alura.com.br/course/dotnet-aplicacao-web-asp-net-core-blazor)
