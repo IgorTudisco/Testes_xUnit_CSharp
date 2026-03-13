@@ -17,15 +17,21 @@ public class OfertaViagemDalAdicionar
         _context = new JornadaMilhasContext(opitions);
     }
 
-    [Fact]
-    public void RegistraOfertaNoBanco()
+    public OfertaViagem CriarOfertaComValorfixo()
     {
-        // arrage
         Rota rota = new Rota("Curitiba", "São Paulo");
         Periodo periodo = new Periodo(new DateTime(2024, 05, 20), new DateTime(2026, 05, 30));
         double preco = 150.00;
 
         var ofertaViagem = new OfertaViagem(rota, periodo, preco);
+        return ofertaViagem;
+    }
+
+    [Fact]
+    public void RegistraOfertaNoBanco()
+    {
+        // arrage
+        var ofertaViagem = CriarOfertaComValorfixo();
         var dal = new OfertaViagemDAL(_context);
 
         // act
@@ -35,19 +41,14 @@ public class OfertaViagemDalAdicionar
         var ofertaIncluida = dal.RecuperarPorId(ofertaViagem.Id);
 
         Assert.NotNull(ofertaIncluida);
-        Assert.Equal(ofertaIncluida.Preco, preco, 0.001);
-
+        Assert.Equal(ofertaIncluida.Preco, ofertaViagem.Preco, 0.001);
     }
 
     [Fact]
-    public void RegistraInformacoesNoBancoCorretas()
+    public void RegistraInformacoesNoBancoCorretamente()
     {
         // arrage
-        Rota rota = new Rota("Curitiba", "São Paulo");
-        Periodo periodo = new Periodo(new DateTime(2024, 05, 20), new DateTime(2026, 05, 30));
-        double preco = 150.00;
-
-        var ofertaViagem = new OfertaViagem(rota, periodo, preco);
+        var ofertaViagem = CriarOfertaComValorfixo();
         var dal = new OfertaViagemDAL(_context);
 
         // act
@@ -61,6 +62,5 @@ public class OfertaViagemDalAdicionar
         Assert.Equal(ofertaIncluida.Periodo.DataInicial, ofertaViagem.Periodo.DataInicial);
         Assert.Equal(ofertaIncluida.Periodo.DataFinal, ofertaViagem.Periodo.DataFinal);
         Assert.Equal(ofertaIncluida.Preco, ofertaViagem.Preco, 0.001);
-
     }
 }

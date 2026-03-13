@@ -8,6 +8,7 @@
 ## Documentação
 
 - ### https://learn.microsoft.com/pt-br/ef/core/testing/testing-without-the-database#inmemory-provider
+- ### https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices#prefer-helper-methods-to-setup-and-teardown
 <!--
 ## Livros
 
