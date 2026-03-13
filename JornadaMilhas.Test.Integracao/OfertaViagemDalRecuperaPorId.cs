@@ -1,15 +1,10 @@
 ﻿using JornadaMilhas.Dados;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit.Abstractions;
 
 namespace JornadaMilhas.Test.Integracao;
 
-public class OfertaViagemDalRecuperaPorId : IClassFixture<ContextoFixture>
+[Collection(nameof(ContextoCollection))]
+public class OfertaViagemDalRecuperaPorId
 {
     private readonly JornadaMilhasContext _context;
 
