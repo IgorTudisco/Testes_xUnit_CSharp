@@ -5,20 +5,14 @@ using Xunit.Abstractions;
 
 namespace JornadaMilhas.Test.Integracao;
 
-public class OfertaViagemDalAdicionar
+public class OfertaViagemDalAdicionar : IClassFixture<ContextoFixture>
 {
     private readonly JornadaMilhasContext _context;
 
-    public OfertaViagemDalAdicionar(ITestOutputHelper outputHelper)
+    public OfertaViagemDalAdicionar(ITestOutputHelper outputHelper, ContextoFixture contextoFixture)
     {
-        var opitions = new DbContextOptionsBuilder<JornadaMilhasContext>()
-            .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=JornadaMilhas;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False")
-            .Options;
-
-        _context = new JornadaMilhasContext(opitions);
-
-        // Exibe o hash code do contexto para verificar se a conexão foi estabelecida corretamente
-        // Com isso podemos ver que o xUnit cria uma nova instância do contexto para cada teste.
+        // Utilizando o ContextoFixture para garantir que o contexto seja compartilhado entre os testes
+        _context = contextoFixture.Context;
         outputHelper.WriteLine($"Conexão {_context.GetHashCode()} com o banco de dados estabelecida com sucesso.");
     }
 
