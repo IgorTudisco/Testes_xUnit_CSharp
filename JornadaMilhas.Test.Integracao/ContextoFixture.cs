@@ -58,15 +58,16 @@ public class ContextoFixture : IAsyncLifetime
         Context.SaveChanges();
     }
 
-    // Método para limpar o banco de dados, para garantir que cada teste use um banco limpo e evitar interferências entre os testes
+    /// <summary>
+    /// Garante o isolamento entre os testes, limpando o estado do banco de dados 
+    /// para evitar efeitos colaterais e garantir a determinística dos resultados.
+    /// </summary>
     public async Task ClearDb()
     {
-        // Usando ExecuteSqlRawAsync para executar comandos SQL diretamente no banco de dados, garantindo que todas as ofertas de viagem sejam removidas após cada teste, mantendo a integridade dos testes de integração. Essa abordagem é mais eficiente que usar o método RemoveRange, especialmente quando lidamos com um grande número de registros, pois evita a necessidade de carregar os dados na memória antes de excluí-los. Ex: Context.RemoveRange(Context.OfertasViagem); e Context.SaveChanges();
-
-        // Forma correta: libera a thread enquanto o banco trabalha.
+        // Optamos por ExecuteSqlRawAsync em vez de RemoveRange para ignorar o Change Tracker do EF Core.
+        // Isso reduz o consumo de memória e melhora a performance ao evitar o carregamento dos registros 
+        // antes da exclusão (ideal para ambientes de CI/CD ou Docker com latência de I/O).
         await Context.Database.ExecuteSqlRawAsync("DELETE FROM OfertasViagem");
-
-        // Forma perigosa: trava a thread e espera "na marra".
-        Context.Database.ExecuteSqlRawAsync("DELETE FROM OfertasViagem").Wait();
+        await Context.Database.ExecuteSqlRawAsync("DELETE FROM Rota");
     }
 }

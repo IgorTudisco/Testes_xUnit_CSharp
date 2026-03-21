@@ -79,11 +79,11 @@ public class OfertaViagemDalRecuperaMaiorDesconto : IDisposable
         Assert.NotNull(oferta);
         Assert.Equal(precoEsperado, oferta.Preco, 0.0001);
     }
-
-    // Implementação do método Dispose para limpar o banco de dados após os testes, garantindo que cada teste seja executado em uma base limpa
-    // Assim usando o conceito de TearDown para evitar que os dados de um teste interfiram nos outros, mantendo a integridade dos testes de integração.
+    
+    // Implementa o padrão IDisposable para garantir o isolamento do ambiente de teste.
+    // Realiza o "TearDown" (limpeza) do banco de dados para evitar efeitos colaterais entre execuções.
     public void Dispose()
     {
-        fixture.ClearDb().Wait();
+        fixture.ClearDb();
     }
 }
