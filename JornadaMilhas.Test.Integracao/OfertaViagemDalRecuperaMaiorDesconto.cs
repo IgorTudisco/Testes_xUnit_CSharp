@@ -14,9 +14,12 @@ namespace JornadaMilhas.Test.Integracao;
 public class OfertaViagemDalRecuperaMaiorDesconto
 {
     private readonly JornadaMilhasContext _contexto;
+    private readonly ContextoFixture fixture;
+
     public OfertaViagemDalRecuperaMaiorDesconto(ContextoFixture fixture)
     {
         _contexto = fixture.Context;
+        this.fixture = fixture;
     }
 
     [Fact]
@@ -24,43 +27,19 @@ public class OfertaViagemDalRecuperaMaiorDesconto
     public void RetornaOfertaEspecificaQuandoDestinoSaoPauloEDesconto40()
     {
         //arrange
-        var fakerPeriodo = new Faker<Periodo>()
-            .CustomInstantiator(f =>
-            {
-                DateTime dataInicio = f.Date.Soon();
-                return new Periodo(dataInicio, dataInicio.AddDays(30));
-            });
+        var rota = new Rota("Bhaia","São Paulo");
+        var periodo = new Periodo(DateTime.Now, DateTime.Now.AddDays(30));
 
-        var rota = new Rota("Curitiba", "São Paulo");
+        fixture.GeraDadosFaker();
 
-        var fakerOferta = new Faker<OfertaViagem>()
-            .CustomInstantiator(f => new OfertaViagem(
-                rota,
-                fakerPeriodo.Generate(),
-                100 * f.Random.Int(1, 100))
-            )
-            .RuleFor(o => o.Desconto, f => 40)
-            .RuleFor(o => o.Ativa, f => true);
-
-        var ofertaEscolhida = new OfertaViagem(rota, fakerPeriodo.Generate(), 80)
+        var ofertaEscolhida = new OfertaViagem(rota, periodo, 80)
         {
             Desconto = 40,
             Ativa = true
         };
 
-        var ofertaInativa = new OfertaViagem(rota, fakerPeriodo.Generate(), 70)
-        {
-            Desconto = 40,
-            Ativa = false
-        };
-
         var dal = new OfertaViagemDAL(_contexto);
-        var lista = fakerOferta.Generate(200);
-        lista.Add(ofertaEscolhida);
-        lista.Add(ofertaInativa);
-
-        _contexto.OfertasViagem.AddRange(lista);
-        _contexto.SaveChanges();
+        dal.Adicionar(ofertaEscolhida);
 
         Func<OfertaViagem, bool> filtro = o => o.Rota.Destino.Equals("São Paulo");
         var precoEsperado = 40;
