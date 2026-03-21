@@ -11,6 +11,7 @@
 - ### https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-best-practices#prefer-helper-methods-to-setup-and-teardown
 - ### https://xunit.net/docs/shared-context
 - ### https://xunit.net/docs/shared-context#assembly-fixture
+- ### https://refactoring.guru/pt-br/design-patterns/builder
 
 <!--
 ## Livros

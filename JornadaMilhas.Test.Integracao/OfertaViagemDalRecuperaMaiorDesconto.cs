@@ -28,7 +28,7 @@ public class OfertaViagemDalRecuperaMaiorDesconto
     {
         //arrange
         var rota = new Rota("Bhaia","São Paulo");
-        var periodo = new Periodo(DateTime.Now, DateTime.Now.AddDays(30));
+        var periodo = new PeriodoDataBuilder() { DataInicial = new DateTime(2024, 7, 1) }.Build();
 
         fixture.GeraDadosFaker();
 
