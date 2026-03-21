@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace JornadaMilhas.Test.Integracao;
 
 [Collection(nameof(ContextoCollection))]
-public class OfertaViagemDalRecuperaMaiorDesconto
+public class OfertaViagemDalRecuperaMaiorDesconto : IDisposable
 {
     private readonly JornadaMilhasContext _contexto;
     private readonly ContextoFixture fixture;
@@ -23,7 +23,6 @@ public class OfertaViagemDalRecuperaMaiorDesconto
     }
 
     [Fact]
-    // Refatorando o código para usar o contexto de teste e o gerenciador de ofertas, garantindo que a oferta específica seja retornada corretamente do banco de dados.
     public void RetornaOfertaEspecificaQuandoDestinoSaoPauloEDesconto40()
     {
         //arrange
@@ -50,5 +49,41 @@ public class OfertaViagemDalRecuperaMaiorDesconto
         //assert
         Assert.NotNull(oferta);
         Assert.Equal(precoEsperado, oferta.Preco, 0.0001);
+    }
+
+    [Fact]
+    public void RetornaOfertaEspecificaQuandoDestinoSaoPauloEDesconto60()
+    {
+        //arrange
+        var rota = new RotaDataBuilder() { Origem = "Bhaia", Destino = "São Paulo" };
+        var periodo = new PeriodoDataBuilder() { DataInicial = new DateTime(2024, 7, 1) }.Build();
+
+        fixture.GeraDadosFaker();
+
+        var ofertaEscolhida = new OfertaViagem(rota, periodo, 80)
+        {
+            Desconto = 60,
+            Ativa = true
+        };
+
+        var dal = new OfertaViagemDAL(_contexto);
+        dal.Adicionar(ofertaEscolhida);
+
+        Func<OfertaViagem, bool> filtro = o => o.Rota.Destino.Equals("São Paulo");
+        var precoEsperado = 20;
+
+        //act
+        var oferta = dal.RecuperaMaiorDesconto(filtro);
+
+        //assert
+        Assert.NotNull(oferta);
+        Assert.Equal(precoEsperado, oferta.Preco, 0.0001);
+    }
+
+    // Implementação do método Dispose para limpar o banco de dados após os testes, garantindo que cada teste seja executado em uma base limpa
+    // Assim usando o conceito de TearDown para evitar que os dados de um teste interfiram nos outros, mantendo a integridade dos testes de integração.
+    public void Dispose()
+    {
+        fixture.ClearDb().Wait();
     }
 }

@@ -1,9 +1,8 @@
 # *Referencias Bibliograficas:*
-<!--
+
 ## Artigos
 
-- ### https://learn.microsoft.com/pt-br/ef/core/testing/testing-without-the-database#inmemory-provider
--->
+- ### https://medium.com/@kova98/easy-test-database-reset-in-net-with-respawn-d5a59f995e9d
 
 ## Documentação
 
