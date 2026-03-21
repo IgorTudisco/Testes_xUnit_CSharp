@@ -20,7 +20,7 @@ public class OfertaViagemDalRecuperaMaiorDesconto
     }
 
     [Fact]
-    // Reutilizando o código de teste de unidade (Refatorar)
+    // Refatorando o código para usar o contexto de teste e o gerenciador de ofertas, garantindo que a oferta específica seja retornada corretamente do banco de dados.
     public void RetornaOfertaEspecificaQuandoDestinoSaoPauloEDesconto40()
     {
         //arrange
@@ -54,16 +54,19 @@ public class OfertaViagemDalRecuperaMaiorDesconto
             Ativa = false
         };
 
-
+        var dal = new OfertaViagemDAL(_contexto);
         var lista = fakerOferta.Generate(200);
         lista.Add(ofertaEscolhida);
         lista.Add(ofertaInativa);
-        var gerenciador = new GerenciadorDeOfertas(lista);
+
+        _contexto.OfertasViagem.AddRange(lista);
+        _contexto.SaveChanges();
+
         Func<OfertaViagem, bool> filtro = o => o.Rota.Destino.Equals("São Paulo");
         var precoEsperado = 40;
 
         //act
-        var oferta = gerenciador.RecuperaMaiorDesconto(filtro);
+        var oferta = dal.RecuperaMaiorDesconto(filtro);
 
         //assert
         Assert.NotNull(oferta);
