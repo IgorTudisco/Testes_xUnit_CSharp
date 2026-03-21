@@ -18,7 +18,7 @@ public class OfertaViagemDalRecuperaMaiorDesconto : IDisposable
 
     public OfertaViagemDalRecuperaMaiorDesconto(ContextoFixture fixture)
     {
-        _contexto = fixture.Context;
+        _contexto = fixture.Context!;
         this.fixture = fixture;
     }
 

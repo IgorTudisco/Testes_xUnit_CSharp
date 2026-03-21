@@ -13,7 +13,7 @@ public class OfertaViagemDalAdicionar
     public OfertaViagemDalAdicionar(ITestOutputHelper outputHelper, ContextoFixture contextoFixture)
     {
         // Utilizando o ContextoFixture para garantir que o contexto seja compartilhado entre os testes
-        _context = contextoFixture.Context;
+        _context = contextoFixture.Context!;
         outputHelper.WriteLine($"Conexão {_context.GetHashCode()} com o banco de dados estabelecida com sucesso.");
     }
 

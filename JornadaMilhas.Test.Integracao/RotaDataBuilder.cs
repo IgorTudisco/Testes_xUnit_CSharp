@@ -10,8 +10,8 @@ namespace JornadaMilhas.Test.Integracao;
 
 public class RotaDataBuilder : Faker<Rota>
 {
-    public string Origem { get; set; }
-    public string Destino { get; set; }
+    public string? Origem { get; set; }
+    public string? Destino { get; set; }
 
     public RotaDataBuilder()
     {

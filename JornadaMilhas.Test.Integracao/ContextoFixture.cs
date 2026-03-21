@@ -14,11 +14,10 @@ namespace JornadaMilhas.Test.Integracao;
 // fix: A arumando o problema de criação assíncrona do contexto
 public class ContextoFixture : IAsyncLifetime
 {
-    public JornadaMilhasContext Context { get; private set; }
+    public JornadaMilhasContext? Context { get; private set; }
 
-    // Configuração do container do SQL Server para testes de integração no Docker
-    private readonly MsSqlContainer _sqlContainer = new MsSqlBuilder()
-        .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
+    // Configuração atualizada para criar um container do SQL Server para testes de integração no Docker
+    private readonly MsSqlContainer _sqlContainer = new MsSqlBuilder("mcr.microsoft.com/mssql/server:2022-latest")
         .Build();
 
     public async Task InitializeAsync()
@@ -54,7 +53,7 @@ public class ContextoFixture : IAsyncLifetime
 
         var listaOfertaFaker = fakerOferta.Generate(200);
 
-        Context.OfertasViagem.AddRange(listaOfertaFaker);
+        Context!.OfertasViagem.AddRange(listaOfertaFaker);
         Context.SaveChanges();
     }
 
@@ -67,7 +66,7 @@ public class ContextoFixture : IAsyncLifetime
         // Optamos por ExecuteSqlRawAsync em vez de RemoveRange para ignorar o Change Tracker do EF Core.
         // Isso reduz o consumo de memória e melhora a performance ao evitar o carregamento dos registros 
         // antes da exclusão (ideal para ambientes de CI/CD ou Docker com latência de I/O).
-        await Context.Database.ExecuteSqlRawAsync("DELETE FROM OfertasViagem");
+        await Context!.Database.ExecuteSqlRawAsync("DELETE FROM OfertasViagem");
         await Context.Database.ExecuteSqlRawAsync("DELETE FROM Rota");
     }
 }
