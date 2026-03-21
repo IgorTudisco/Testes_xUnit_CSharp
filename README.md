@@ -8,9 +8,9 @@
 
 
 - ### Testes em .NET: testando integração com banco de dados [Link do curso](https://cursos.alura.com.br/course/testes-dotnet-testando-integracao-banco-dados)
-<!--
-  - Certificado [Link](https://cursos.alura.com.br/certificate/igortudisco/dotnet-criando-api-web-asp-net-core)
 
+  - Certificado [Link](https://cursos.alura.com.br/certificate/igortudisco/testes-dotnet-testando-integracao-banco-dados)
+<!--
 - ### .NET: desenvolvendo uma aplicação web com ASP.NET Core Blazor [Link do curso](https://cursos.alura.com.br/course/dotnet-aplicacao-web-asp-net-core-blazor)
 
   - Certificado [Link](https://cursos.alura.com.br/certificate/igortudisco/dotnet-aplicacao-web-asp-net-core-blazor)
