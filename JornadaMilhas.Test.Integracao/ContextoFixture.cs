@@ -41,11 +41,11 @@ public class ContextoFixture : IAsyncLifetime
     {
         Periodo periodo = new PeriodoDataBuilder().Build();
 
-        var rota = new Rota("Curitiba", "São Paulo");
+        Rota rota = new RotaDataBuilder().Build();
 
         var fakerOferta = new Faker<OfertaViagem>()
             .CustomInstantiator(f => new OfertaViagem(
-                rota,
+                new RotaDataBuilder().Build(),
                 new PeriodoDataBuilder().Build(),
                 100 * f.Random.Int(1, 100))
             )
