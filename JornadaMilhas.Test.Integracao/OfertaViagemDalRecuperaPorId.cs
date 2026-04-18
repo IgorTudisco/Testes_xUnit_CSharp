@@ -11,7 +11,7 @@ public class OfertaViagemDalRecuperaPorId
     public OfertaViagemDalRecuperaPorId(ITestOutputHelper outputHelper, ContextoFixture contextoFixture)
     {
         // Utilizando a conexão compartilhada para teste de percistencia
-        _context = contextoFixture.Context;
+        _context = contextoFixture.Context!;
         outputHelper.WriteLine($"Conexão {_context.GetHashCode()} com o banco de dados estabelecida com sucesso.");
     }
 
